@@ -62,7 +62,9 @@
                 <h5>Pemasukan vs Pengeluaran (12 Bulan Terakhir)</h5>
             </div>
             <div class="card-body">
-                <canvas id="barChart" height="100"></canvas>
+                <div style="height: 300px;">
+                    <canvas id="barChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +77,9 @@
                 <?php if (empty($expenseByCategory)): ?>
                     <p class="text-center text-muted">Belum ada data pengeluaran bulan ini</p>
                 <?php else: ?>
-                    <canvas id="doughnutChart"></canvas>
+                    <div style="height: 300px;">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -133,88 +137,101 @@
 </div>
 
 <script>
+// Debug: Check if data is available
+console.log('Monthly Data:', <?= json_encode($monthlyData) ?>);
+console.log('Expense by Category:', <?= json_encode($expenseByCategory) ?>);
+
 // Prepare data for charts
 const monthlyData = <?= json_encode($monthlyData) ?>;
 const expenseByCategory = <?= json_encode($expenseByCategory) ?>;
 
-// Bar Chart
-const barCtx = document.getElementById('barChart').getContext('2d');
-const barChart = new Chart(barCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-        datasets: [{
-            label: 'Pemasukan',
-            data: monthlyData.map(item => item.income),
-            backgroundColor: '#198754',
-            borderColor: '#198754',
-            borderWidth: 1
-        }, {
-            label: 'Pengeluaran',
-            data: monthlyData.map(item => item.expense),
-            backgroundColor: '#dc3545',
-            borderColor: '#dc3545',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value) {
-                        return 'Rp ' + value.toLocaleString('id-ID');
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Bar Chart
+    const barCanvas = document.getElementById('barChart');
+    if (barCanvas && monthlyData) {
+        const barCtx = barCanvas.getContext('2d');
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                datasets: [{
+                    label: 'Pemasukan',
+                    data: monthlyData.map(item => parseFloat(item.income) || 0),
+                    backgroundColor: '#198754',
+                    borderColor: '#198754',
+                    borderWidth: 1
+                }, {
+                    label: 'Pengeluaran',
+                    data: monthlyData.map(item => parseFloat(item.expense) || 0),
+                    backgroundColor: '#dc3545',
+                    borderColor: '#dc3545',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + value.toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': Rp ' + context.parsed.y.toLocaleString('id-ID');
+                            }
+                        }
                     }
                 }
             }
-        },
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        return context.dataset.label + ': Rp ' + context.parsed.y.toLocaleString('id-ID');
-                    }
-                }
-            }
-        }
+        });
     }
-});
 
-// Doughnut Chart
-<?php if (!empty($expenseByCategory)): ?>
-const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
-const doughnutChart = new Chart(doughnutCtx, {
-    type: 'doughnut',
-    data: {
-        labels: expenseByCategory.map(item => item.name),
-        datasets: [{
-            data: expenseByCategory.map(item => item.total),
-            backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#4BC0C0',
-                '#9966FF',
-                '#FF9F40',
-                '#FF6384',
-                '#C9CBCF'
-            ]
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        return context.label + ': Rp ' + context.parsed.toLocaleString('id-ID');
+    // Doughnut Chart
+    const doughnutCanvas = document.getElementById('doughnutChart');
+    if (doughnutCanvas && expenseByCategory && expenseByCategory.length > 0) {
+        const doughnutCtx = doughnutCanvas.getContext('2d');
+        const doughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: expenseByCategory.map(item => item.name),
+                datasets: [{
+                    data: expenseByCategory.map(item => parseFloat(item.total) || 0),
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF',
+                        '#FF9F40',
+                        '#FF6384',
+                        '#C9CBCF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': Rp ' + context.parsed.toLocaleString('id-ID');
+                            }
+                        }
                     }
                 }
             }
-        }
+        });
     }
 });
-<?php endif; ?>
 </script>
 <?= $this->endSection() ?>
