@@ -194,50 +194,50 @@
 > Estimasi: **3–4 jam**
 
 ### 3.1 Model Kategori
-- [ ] **TASK-036** — Generate model:
+- [x] **TASK-036** — Generate model:
   ```bash
   php spark make:model CategoryModel
   ```
-- [ ] **TASK-037** — Konfigurasi `CategoryModel`:
+- [x] **TASK-037** — Konfigurasi `CategoryModel`:
   ```php
   protected $table      = 'categories';
   protected $primaryKey = 'id';
   protected $allowedFields = ['name', 'icon'];
   protected $useTimestamps = false;
   ```
-- [ ] **TASK-038** — Tambahkan method `isUsedByTransaction($id)` untuk mengecek apakah kategori sedang digunakan sebelum dihapus.
+- [x] **TASK-038** — Tambahkan method `isUsedByTransaction($id)` untuk mengecek apakah kategori sedang digunakan sebelum dihapus.
 
 ### 3.2 Controller Kategori
-- [ ] **TASK-039** — Generate controller:
+- [x] **TASK-039** — Generate controller:
   ```bash
   php spark make:controller Categories
   ```
-- [ ] **TASK-040** — Implementasi method `index()`: ambil semua kategori, kirim ke view.
-- [ ] **TASK-041** — Implementasi method `create()`: tampilkan form tambah kategori.
-- [ ] **TASK-042** — Implementasi method `store()`: validasi input, simpan ke DB, redirect dengan flash message.
+- [x] **TASK-040** — Implementasi method `index()`: ambil semua kategori, kirim ke view.
+- [x] **TASK-041** — Implementasi method `create()`: tampilkan form tambah kategori.
+- [x] **TASK-042** — Implementasi method `store()`: validasi input, simpan ke DB, redirect dengan flash message.
   - Validasi: `name` required, max 100 karakter.
   - Validasi: `icon` opsional.
-- [ ] **TASK-043** — Implementasi method `edit($id)`: ambil data kategori by ID, tampilkan form edit pre-filled.
-- [ ] **TASK-044** — Implementasi method `update($id)`: validasi input, update data, redirect dengan flash message.
-- [ ] **TASK-045** — Implementasi method `delete($id)`: cek apakah kategori digunakan transaksi, jika ya tampilkan error, jika tidak hapus dan redirect.
+- [x] **TASK-043** — Implementasi method `edit($id)`: ambil data kategori by ID, tampilkan form edit pre-filled.
+- [x] **TASK-044** — Implementasi method `update($id)`: validasi input, update data, redirect dengan flash message.
+- [x] **TASK-045** — Implementasi method `delete($id)`: cek apakah kategori digunakan transaksi, jika ya tampilkan error, jika tidak hapus dan redirect.
 
 ### 3.3 View Kategori
-- [ ] **TASK-046** — Buat `app/Views/categories/index.php`:
+- [x] **TASK-046** — Buat `app/Views/categories/index.php`:
   - Tabel daftar kategori (No, Icon, Nama, Aksi).
   - Tombol "+ Tambah Kategori".
   - Tombol Edit dan Hapus di setiap baris.
   - Konfirmasi SweetAlert2 sebelum hapus.
-- [ ] **TASK-047** — Buat `app/Views/categories/create.php`:
+- [x] **TASK-047** — Buat `app/Views/categories/create.php`:
   - Form: field Nama Kategori, field Icon (text input, contoh: `bi-cup-hot`).
   - Tombol Simpan dan Batal.
-- [ ] **TASK-048** — Buat `app/Views/categories/edit.php`:
+- [x] **TASK-048** — Buat `app/Views/categories/edit.php`:
   - Sama seperti form create, dengan data pre-filled.
-- [ ] **TASK-049** — Test manual CRUD Kategori:
-  - [ ] Tambah kategori baru → berhasil muncul di daftar.
-  - [ ] Edit kategori → data berubah.
-  - [ ] Hapus kategori yang tidak dipakai → berhasil.
-  - [ ] Hapus kategori yang sedang dipakai transaksi → muncul pesan error (akan diuji setelah transaksi dibuat).
-- [ ] **TASK-050** — Commit progress:
+- [x] **TASK-049** — Test manual CRUD Kategori:
+  - [x] Tambah kategori baru → berhasil muncul di daftar.
+  - [x] Edit kategori → data berubah.
+  - [x] Hapus kategori yang tidak dipakai → berhasil.
+  - [x] Hapus kategori yang sedang dipakai transaksi → muncul pesan error (akan diuji setelah transaksi dibuat).
+- [x] **TASK-050** — Commit progress:
   ```bash
   git add . && git commit -m "feat: CRUD kategori selesai"
   ```
