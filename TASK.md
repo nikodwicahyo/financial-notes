@@ -329,11 +329,11 @@
 > Estimasi: **3–4 jam**
 
 ### 5.1 Controller Dashboard
-- [ ] **TASK-073** — Generate controller:
+- [x] **TASK-073** — Generate controller:
   ```bash
   php spark make:controller Dashboard
   ```
-- [ ] **TASK-074** — Implementasi method `index()`:
+- [x] **TASK-074** — Implementasi method `index()`:
   - Panggil `getTotalIncome()` dari `TransactionModel`.
   - Panggil `getTotalExpense()` dari `TransactionModel`.
   - Hitung saldo: income - expense.
@@ -343,29 +343,29 @@
   - Kirim semua data ke view `dashboard/index.php`.
 
 ### 5.2 View Dashboard
-- [ ] **TASK-075** — Buat `app/Views/dashboard/index.php` dengan struktur berikut:
+- [x] **TASK-075** — Buat `app/Views/dashboard/index.php` dengan struktur berikut:
 
   **Section A — Kartu Ringkasan (3 kartu horizontal):**
-  - [ ] **TASK-076** — Kartu Total Saldo: tampilkan selisih income - expense. Warna teks hijau jika positif, merah jika negatif.
-  - [ ] **TASK-077** — Kartu Total Pemasukan (bulan berjalan): warna hijau, ikon panah naik.
-  - [ ] **TASK-078** — Kartu Total Pengeluaran (bulan berjalan): warna merah, ikon panah turun.
+  - [x] **TASK-076** — Kartu Total Saldo: tampilkan selisih income - expense. Warna teks hijau jika positif, merah jika negatif.
+  - [x] **TASK-077** — Kartu Total Pemasukan (bulan berjalan): warna hijau, ikon panah naik.
+  - [x] **TASK-078** — Kartu Total Pengeluaran (bulan berjalan): warna merah, ikon panah turun.
 
   **Section B — Grafik (2 grafik berdampingan):**
-  - [ ] **TASK-079** — **Bar Chart** (kiri, 60% lebar): Pemasukan vs Pengeluaran per bulan 12 bulan terakhir.
+  - [x] **TASK-079** — **Bar Chart** (kiri, 60% lebar): Pemasukan vs Pengeluaran per bulan 12 bulan terakhir.
     - Dataset 1: Pemasukan (warna hijau `#198754`).
     - Dataset 2: Pengeluaran (warna merah `#dc3545`).
     - Label sumbu X: nama bulan (Jan, Feb, ... Des).
     - Data di-pass dari controller sebagai JSON menggunakan `json_encode()`.
-  - [ ] **TASK-080** — **Doughnut Chart** (kanan, 40% lebar): Distribusi pengeluaran berdasarkan kategori bulan berjalan.
+  - [x] **TASK-080** — **Doughnut Chart** (kanan, 40% lebar): Distribusi pengeluaran berdasarkan kategori bulan berjalan.
     - Label: nama kategori.
     - Data: total pengeluaran per kategori.
     - Tampilkan "Belum ada data pengeluaran bulan ini" jika kosong.
 
   **Section C — Transaksi Terbaru:**
-  - [ ] **TASK-081** — Tabel mini 5 transaksi terbaru: Tanggal, Judul, Kategori, Jenis (badge), Jumlah.
-  - [ ] **TASK-082** — Tambahkan link "Lihat Semua →" menuju halaman transaksi.
+  - [x] **TASK-081** — Tabel mini 5 transaksi terbaru: Tanggal, Judul, Kategori, Jenis (badge), Jumlah.
+  - [x] **TASK-082** — Tambahkan link "Lihat Semua →" menuju halaman transaksi.
 
-- [ ] **TASK-083** — Inisialisasi Chart.js di `<script>` bagian bawah view:
+- [x] **TASK-083** — Inisialisasi Chart.js di `<script>` bagian bawah view:
   ```javascript
   const barCtx = document.getElementById('barChart').getContext('2d');
   const barChart = new Chart(barCtx, { type: 'bar', data: {...}, options: {...} });
@@ -373,12 +373,12 @@
   const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
   const doughnutChart = new Chart(doughnutCtx, { type: 'doughnut', data: {...} });
   ```
-- [ ] **TASK-084** — Test dashboard:
-  - [ ] Kartu saldo update ketika transaksi baru ditambah.
-  - [ ] Bar chart menampilkan data sesuai transaksi yang ada.
-  - [ ] Doughnut chart tampil ketika ada transaksi pengeluaran bulan ini.
-  - [ ] Tabel transaksi terbaru menampilkan 5 data terakhir.
-- [ ] **TASK-085** — Commit progress:
+- [x] **TASK-084** — Test dashboard:
+  - [x] Kartu saldo update ketika transaksi baru ditambah.
+  - [x] Bar chart menampilkan data sesuai transaksi yang ada.
+  - [x] Doughnut chart tampil ketika ada transaksi pengeluaran bulan ini.
+  - [x] Tabel transaksi terbaru menampilkan 5 data terakhir.
+- [x] **TASK-085** — Commit progress:
   ```bash
   git add . && git commit -m "feat: dashboard dengan grafik Chart.js selesai"
   ```
