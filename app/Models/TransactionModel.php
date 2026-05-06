@@ -30,20 +30,29 @@ class TransactionModel extends Model
     {
         $data = [];
         for ($month = 1; $month <= 12; $month++) {
-            $income = $this->where('type', 'income')
-                          ->where('YEAR(transaction_date)', $year)
-                          ->where('MONTH(transaction_date)', $month)
-                          ->selectSum('amount')->first()['amount'] ?? 0;
+            // Create fresh builder instances for each query
+            $incomeBuilder = $this->builder();
+            $income = $incomeBuilder->where('type', 'income')
+                                   ->where('YEAR(transaction_date)', $year)
+                                   ->where('MONTH(transaction_date)', $month)
+                                   ->selectSum('amount')
+                                   ->get()
+                                   ->getRow()
+                                   ->amount ?? 0;
             
-            $expense = $this->where('type', 'expense')
-                           ->where('YEAR(transaction_date)', $year)
-                           ->where('MONTH(transaction_date)', $month)
-                           ->selectSum('amount')->first()['amount'] ?? 0;
+            $expenseBuilder = $this->builder();
+            $expense = $expenseBuilder->where('type', 'expense')
+                                     ->where('YEAR(transaction_date)', $year)
+                                     ->where('MONTH(transaction_date)', $month)
+                                     ->selectSum('amount')
+                                     ->get()
+                                     ->getRow()
+                                     ->amount ?? 0;
             
             $data[] = [
                 'month' => $month,
-                'income' => $income,
-                'expense' => $expense
+                'income' => (float)$income,
+                'expense' => (float)$expense
             ];
         }
         return $data;
@@ -51,13 +60,15 @@ class TransactionModel extends Model
 
     public function getExpenseByCategory($month, $year)
     {
-        return $this->select('categories.name, SUM(transactions.amount) as total')
-                   ->join('categories', 'categories.id = transactions.category_id')
-                   ->where('transactions.type', 'expense')
-                   ->where('MONTH(transactions.transaction_date)', $month)
-                   ->where('YEAR(transactions.transaction_date)', $year)
-                   ->groupBy('transactions.category_id')
-                   ->findAll();
+        $builder = $this->builder();
+        return $builder->select('categories.name, SUM(transactions.amount) as total')
+                      ->join('categories', 'categories.id = transactions.category_id')
+                      ->where('transactions.type', 'expense')
+                      ->where('MONTH(transactions.transaction_date)', $month)
+                      ->where('YEAR(transactions.transaction_date)', $year)
+                      ->groupBy('transactions.category_id')
+                      ->get()
+                      ->getResultArray();
     }
 
     public function getRecent($limit = 5)
