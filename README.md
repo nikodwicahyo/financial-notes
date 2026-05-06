@@ -226,50 +226,6 @@ Aplikasi telah melalui testing manual meliputi:
 
 ---
 
-## 🗄️ Struktur Database
-
-### Tabel `categories`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| id | INT (PK, AI) | ID kategori |
-| name | VARCHAR(100) | Nama kategori |
-| icon | VARCHAR(50) | Ikon Bootstrap Icons |
-| created_at | DATETIME | Tanggal dibuat |
-
-### Tabel `transactions`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| id | INT (PK, AI) | ID transaksi |
-| title | VARCHAR(150) | Judul transaksi |
-| type | ENUM('income','expense') | Jenis transaksi |
-| amount | DECIMAL(15,2) | Jumlah nominal |
-| category_id | INT (FK) | ID kategori |
-| transaction_date | DATE | Tanggal transaksi |
-| note | TEXT | Catatan (opsional) |
-| created_at | DATETIME | Tanggal dibuat |
-| updated_at | DATETIME | Tanggal diupdate |
-
-**Relasi:** `transactions.category_id` → `categories.id` (RESTRICT, CASCADE)
-
----
-
-## 🔄 Reset Database
-
-Jika ingin mereset database ke kondisi awal:
-
-```bash
-# Rollback semua migration
-php spark migrate:rollback
-
-# Jalankan ulang migration
-php spark migrate
-
-# Jalankan seeder
-php spark db:seed CategorySeeder
-```
-
 ## 👨‍💻 Kontributor
 
 Dikembangkan sebagai studi kasus pembelajaran CodeIgniter 4 untuk manajemen keuangan personal.
