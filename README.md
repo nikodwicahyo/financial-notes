@@ -228,8 +228,8 @@ Aplikasi telah melalui testing manual meliputi:
 
 ## 👨‍💻 Kontributor
 
-Dikembangkan sebagai studi kasus pembelajaran CodeIgniter 4 untuk manajemen keuangan personal.
-Dibuat oleh Niko Dwicahyo Widiyanto
+Dibuat oleh Niko Dwicahyo Widiyanto dan dikembangkan sebagai studi kasus pembelajaran CodeIgniter 4 untuk manajemen keuangan personal.
+
 
 ---
 
