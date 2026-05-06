@@ -389,11 +389,11 @@
 > Estimasi: **2–3 jam**
 
 ### 6.1 Controller Laporan
-- [ ] **TASK-086** — Generate controller:
+- [x] **TASK-086** — Generate controller:
   ```bash
   php spark make:controller Reports
   ```
-- [ ] **TASK-087** — Implementasi method `index()`:
+- [x] **TASK-087** — Implementasi method `index()`:
   - Baca parameter filter dari query string: `bulan`, `tahun`, `jenis`, `kategori_id`.
   - Default: bulan & tahun saat ini jika tidak ada parameter.
   - Panggil `getFiltered()` dari `TransactionModel` dengan filter yang diterima.
@@ -401,32 +401,32 @@
   - Kirim data + daftar kategori ke view.
 
 ### 6.2 View Laporan
-- [ ] **TASK-088** — Buat `app/Views/reports/index.php`:
+- [x] **TASK-088** — Buat `app/Views/reports/index.php`:
 
   **Panel Filter:**
-  - [ ] **TASK-089** — Dropdown bulan (Januari–Desember).
-  - [ ] **TASK-090** — Input tahun (number input, default tahun ini).
-  - [ ] **TASK-091** — Dropdown jenis (Semua / Pemasukan / Pengeluaran).
-  - [ ] **TASK-092** — Dropdown kategori (opsional).
-  - [ ] **TASK-093** — Tombol "Tampilkan" (submit GET form).
+  - [x] **TASK-089** — Dropdown bulan (Januari–Desember).
+  - [x] **TASK-090** — Input tahun (number input, default tahun ini).
+  - [x] **TASK-091** — Dropdown jenis (Semua / Pemasukan / Pengeluaran).
+  - [x] **TASK-092** — Dropdown kategori (opsional).
+  - [x] **TASK-093** — Tombol "Tampilkan" (submit GET form).
 
   **Kartu Ringkasan Periode (di atas tabel):**
-  - [ ] **TASK-094** — Total Pemasukan periode yang difilter.
-  - [ ] **TASK-095** — Total Pengeluaran periode yang difilter.
-  - [ ] **TASK-096** — Selisih (Saldo Periode), dengan warna dinamis.
+  - [x] **TASK-094** — Total Pemasukan periode yang difilter.
+  - [x] **TASK-095** — Total Pengeluaran periode yang difilter.
+  - [x] **TASK-096** — Selisih (Saldo Periode), dengan warna dinamis.
 
   **Tabel Hasil:**
-  - [ ] **TASK-097** — Tabel lengkap dengan kolom: No, Tanggal, Judul, Kategori, Jenis, Jumlah, Catatan.
-  - [ ] **TASK-098** — Tampilkan pesan "Tidak ada transaksi pada periode ini" jika hasil kosong.
-  - [ ] **TASK-099** — Tampilkan judul laporan dinamis, contoh: "Laporan Keuangan — Mei 2026".
+  - [x] **TASK-097** — Tabel lengkap dengan kolom: No, Tanggal, Judul, Kategori, Jenis, Jumlah, Catatan.
+  - [x] **TASK-098** — Tampilkan pesan "Tidak ada transaksi pada periode ini" jika hasil kosong.
+  - [x] **TASK-099** — Tampilkan judul laporan dinamis, contoh: "Laporan Keuangan — Mei 2026".
 
-- [ ] **TASK-100** — Test modul laporan:
-  - [ ] Filter bulan & tahun → data sesuai periode.
-  - [ ] Filter jenis pemasukan → hanya tampil pemasukan.
-  - [ ] Filter kategori → hanya tampil transaksi kategori tersebut.
-  - [ ] Kombinasi filter → hasil akurat.
-  - [ ] Periode tanpa transaksi → tampil pesan kosong + ringkasan Rp 0.
-- [ ] **TASK-101** — Commit progress:
+- [x] **TASK-100** — Test modul laporan:
+  - [x] Filter bulan & tahun → data sesuai periode.
+  - [x] Filter jenis pemasukan → hanya tampil pemasukan.
+  - [x] Filter kategori → hanya tampil transaksi kategori tersebut.
+  - [x] Kombinasi filter → hasil akurat.
+  - [x] Periode tanpa transaksi → tampil pesan kosong + ringkasan Rp 0.
+- [x] **TASK-101** — Commit progress:
   ```bash
   git add . && git commit -m "feat: modul laporan dengan filter selesai"
   ```

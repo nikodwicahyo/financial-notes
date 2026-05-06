@@ -11,6 +11,7 @@
             </div>
             <div class="card-body">
                 <form action="<?= base_url('categories/update/' . $category['id']) ?>" method="post">
+                    <?= csrf_field() ?>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Kategori</label>
                         <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" 
