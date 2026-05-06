@@ -137,20 +137,12 @@
 </div>
 
 <script>
-// Debug output
-console.log('Dashboard Data Check:');
-console.log('Monthly Data:', <?= json_encode($monthlyData) ?>);
-console.log('Expense by Category:', <?= json_encode($expenseByCategory) ?>);
-
 // Wait for Chart.js to load
 function initCharts() {
     if (typeof Chart === 'undefined') {
-        console.log('Chart.js not loaded yet, retrying...');
         setTimeout(initCharts, 100);
         return;
     }
-    
-    console.log('Chart.js loaded, initializing charts...');
     
     // Bar Chart Data
     const monthlyData = <?= json_encode($monthlyData) ?>;
@@ -159,9 +151,6 @@ function initCharts() {
     // Extract income and expense data
     const incomeData = monthlyData.map(item => parseFloat(item.income) || 0);
     const expenseData = monthlyData.map(item => parseFloat(item.expense) || 0);
-    
-    console.log('Income Data:', incomeData);
-    console.log('Expense Data:', expenseData);
     
     // Create Bar Chart
     const barCtx = document.getElementById('barChart');
@@ -190,21 +179,16 @@ function initCharts() {
                 }
             }
         });
-        console.log('Bar chart created successfully');
     }
     
     // Doughnut Chart Data
     const expenseByCategory = <?= json_encode($expenseByCategory) ?>;
-    console.log('Expense by Category for Chart:', expenseByCategory);
     
     // Create Doughnut Chart
     const doughnutCtx = document.getElementById('doughnutChart');
     if (doughnutCtx && expenseByCategory && expenseByCategory.length > 0) {
         const labels = expenseByCategory.map(item => item.name);
         const data = expenseByCategory.map(item => parseFloat(item.total) || 0);
-        
-        console.log('Doughnut Labels:', labels);
-        console.log('Doughnut Data:', data);
         
         new Chart(doughnutCtx, {
             type: 'doughnut',
@@ -220,7 +204,6 @@ function initCharts() {
                 maintainAspectRatio: false
             }
         });
-        console.log('Doughnut chart created successfully');
     }
 }
 

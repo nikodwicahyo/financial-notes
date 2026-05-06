@@ -437,17 +437,17 @@
 > Estimasi: **3–4 jam**
 
 ### 7.1 Konsistensi Visual
-- [ ] **TASK-102** — Tambahkan custom CSS di `public/assets/css/style.css`:
+- [x] **TASK-102** — Tambahkan custom CSS di `public/assets/css/style.css`:
   - Style sidebar (lebar 250px, background gelap, active state).
   - Style kartu ringkasan (shadow, border radius).
   - Style badge income/expense.
   - Transisi hover pada tombol dan baris tabel.
-- [ ] **TASK-103** — Pastikan semua halaman menggunakan layout `main.php` secara konsisten.
-- [ ] **TASK-104** — Pastikan sidebar menampilkan active state yang benar di setiap halaman.
-- [ ] **TASK-105** — Pastikan flash message (sukses/error) tampil di semua halaman setelah aksi CRUD.
+- [x] **TASK-103** — Pastikan semua halaman menggunakan layout `main.php` secara konsisten.
+- [x] **TASK-104** — Pastikan sidebar menampilkan active state yang benar di setiap halaman.
+- [x] **TASK-105** — Pastikan flash message (sukses/error) tampil di semua halaman setelah aksi CRUD.
 
 ### 7.2 Konfirmasi Hapus dengan SweetAlert2
-- [ ] **TASK-106** — Implementasi konfirmasi SweetAlert2 untuk hapus transaksi:
+- [x] **TASK-106** — Implementasi konfirmasi SweetAlert2 untuk hapus transaksi:
   ```javascript
   function confirmDelete(url) {
       Swal.fire({
@@ -463,25 +463,25 @@
       });
   }
   ```
-- [ ] **TASK-107** — Terapkan fungsi `confirmDelete()` yang sama untuk hapus kategori.
+- [x] **TASK-107** — Terapkan fungsi `confirmDelete()` yang sama untuk hapus kategori.
 
 ### 7.3 Responsive & Accessibility
-- [ ] **TASK-108** — Test tampilan di lebar layar 768px (tablet) — sidebar bisa di-toggle.
-- [ ] **TASK-109** — Tambahkan toggle sidebar untuk layar kecil menggunakan Bootstrap offcanvas atau collapse.
-- [ ] **TASK-110** — Pastikan semua form punya `label` yang terhubung dengan `id` input (aksesibilitas).
-- [ ] **TASK-111** — Pastikan semua tabel punya `<th>` dengan atribut `scope="col"`.
+- [x] **TASK-108** — Test tampilan di lebar layar 768px (tablet) — sidebar bisa di-toggle.
+- [x] **TASK-109** — Tambahkan toggle sidebar untuk layar kecil menggunakan Bootstrap offcanvas atau collapse.
+- [x] **TASK-110** — Pastikan semua form punya `label` yang terhubung dengan `id` input (aksesibilitas).
+- [x] **TASK-111** — Pastikan semua tabel punya `<th>` dengan atribut `scope="col"`.
 
 ### 7.4 Pengamanan Dasar
-- [ ] **TASK-112** — Aktifkan CSRF protection di `app/Config/Security.php` (`$csrfProtection = 'session'`).
-- [ ] **TASK-113** — Tambahkan `<?= csrf_field() ?>` di dalam semua tag `<form>` method POST.
-- [ ] **TASK-114** — Pastikan semua output data ke view menggunakan `esc()` helper CI4 untuk mencegah XSS.
-- [ ] **TASK-115** — Pastikan semua query database menggunakan Query Builder (bukan raw SQL dengan interpolasi string).
+- [x] **TASK-112** — Aktifkan CSRF protection di `app/Config/Security.php` (`$csrfProtection = 'session'`).
+- [x] **TASK-113** — Tambahkan `<?= csrf_field() ?>` di dalam semua tag `<form>` method POST.
+- [x] **TASK-114** — Pastikan semua output data ke view menggunakan `esc()` helper CI4 untuk mencegah XSS.
+- [x] **TASK-115** — Pastikan semua query database menggunakan Query Builder (bukan raw SQL dengan interpolasi string).
 
 ### 7.5 Halaman Error
-- [ ] **TASK-116** — Buat custom view `app/Views/errors/html/error_404.php` untuk halaman 404 yang sesuai tema.
-- [ ] **TASK-117** — Set `CI_ENVIRONMENT = production` di `.env` untuk menyembunyikan error detail di browser (boleh dikembalikan ke `development` saat testing).
+- [x] **TASK-116** — Buat custom view `app/Views/errors/html/error_404.php` untuk halaman 404 yang sesuai tema.
+- [x] **TASK-117** — Set `CI_ENVIRONMENT = production` di `.env` untuk menyembunyikan error detail di browser (boleh dikembalikan ke `development` saat testing).
 
-- [ ] **TASK-118** — Commit progress:
+- [x] **TASK-118** — Commit progress:
   ```bash
   git add . && git commit -m "feat: polish UI, CSRF, SweetAlert2, responsive"
   ```
@@ -494,42 +494,42 @@
 ### 8.1 Functional Testing (Manual)
 
 **Dashboard:**
-- [ ] **TASK-119** — Kartu saldo menghitung dengan benar setelah tambah/hapus transaksi.
-- [ ] **TASK-120** — Bar chart menampilkan data yang benar untuk 12 bulan.
-- [ ] **TASK-121** — Doughnut chart menampilkan distribusi pengeluaran bulan ini.
-- [ ] **TASK-122** — Tabel transaksi terbaru menampilkan 5 data terakhir.
+- [x] **TASK-119** — Kartu saldo menghitung dengan benar setelah tambah/hapus transaksi.
+- [x] **TASK-120** — Bar chart menampilkan data yang benar untuk 12 bulan.
+- [x] **TASK-121** — Doughnut chart menampilkan distribusi pengeluaran bulan ini.
+- [x] **TASK-122** — Tabel transaksi terbaru menampilkan 5 data terakhir.
 
 **Transaksi:**
-- [ ] **TASK-123** — Tambah transaksi pemasukan → saldo naik.
-- [ ] **TASK-124** — Tambah transaksi pengeluaran → saldo turun.
-- [ ] **TASK-125** — Edit transaksi (ubah jumlah) → saldo terupdate.
-- [ ] **TASK-126** — Hapus transaksi → saldo terupdate, data hilang dari daftar.
-- [ ] **TASK-127** — Submit form tambah transaksi kosong → semua validasi muncul.
-- [ ] **TASK-128** — Input jumlah negatif → validasi menolak.
-- [ ] **TASK-129** — Filter transaksi (kombinasi jenis + kategori + tanggal) → hasil akurat.
+- [x] **TASK-123** — Tambah transaksi pemasukan → saldo naik.
+- [x] **TASK-124** — Tambah transaksi pengeluaran → saldo turun.
+- [x] **TASK-125** — Edit transaksi (ubah jumlah) → saldo terupdate.
+- [x] **TASK-126** — Hapus transaksi → saldo terupdate, data hilang dari daftar.
+- [x] **TASK-127** — Submit form tambah transaksi kosong → semua validasi muncul.
+- [x] **TASK-128** — Input jumlah negatif → validasi menolak.
+- [x] **TASK-129** — Filter transaksi (kombinasi jenis + kategori + tanggal) → hasil akurat.
 
 **Kategori:**
-- [ ] **TASK-130** — Tambah kategori baru → muncul di dropdown transaksi.
-- [ ] **TASK-131** — Edit kategori → nama berubah di semua referensi.
-- [ ] **TASK-132** — Hapus kategori yang tidak digunakan → berhasil.
-- [ ] **TASK-133** — Hapus kategori yang sedang digunakan transaksi → muncul pesan error, data tidak terhapus.
+- [x] **TASK-130** — Tambah kategori baru → muncul di dropdown transaksi.
+- [x] **TASK-131** — Edit kategori → nama berubah di semua referensi.
+- [x] **TASK-132** — Hapus kategori yang tidak digunakan → berhasil.
+- [x] **TASK-133** — Hapus kategori yang sedang digunakan transaksi → muncul pesan error, data tidak terhapus.
 
 **Laporan:**
-- [ ] **TASK-134** — Filter laporan bulan tertentu → data sesuai.
-- [ ] **TASK-135** — Ringkasan periode terhitung benar.
-- [ ] **TASK-136** — Filter bulan tanpa data → tabel kosong + ringkasan Rp 0.
+- [x] **TASK-134** — Filter laporan bulan tertentu → data sesuai.
+- [x] **TASK-135** — Ringkasan periode terhitung benar.
+- [x] **TASK-136** — Filter bulan tanpa data → tabel kosong + ringkasan Rp 0.
 
 **Keamanan:**
-- [ ] **TASK-137** — Akses URL hapus langsung (tanpa konfirmasi) → tetap bisa tapi tidak bypass validasi.
-- [ ] **TASK-138** — Coba submit form tanpa CSRF token → ditolak dengan error 403.
-- [ ] **TASK-139** — Input `<script>alert('xss')</script>` pada field judul → ditampilkan sebagai teks biasa, tidak dieksekusi.
+- [x] **TASK-137** — Akses URL hapus langsung (tanpa konfirmasi) → tetap bisa tapi tidak bypass validasi.
+- [x] **TASK-138** — Coba submit form tanpa CSRF token → ditolak dengan error 403.
+- [x] **TASK-139** — Input `<script>alert('xss')</script>` pada field judul → ditampilkan sebagai teks biasa, tidak dieksekusi.
 
 ### 8.2 Cross-Browser Testing
-- [ ] **TASK-140** — Test di Google Chrome (versi terbaru).
-- [ ] **TASK-141** — Test di Mozilla Firefox (versi terbaru).
-- [ ] **TASK-142** — Test di Microsoft Edge (versi terbaru).
+- [x] **TASK-140** — Test di Google Chrome (versi terbaru).
+- [x] **TASK-141** — Test di Mozilla Firefox (versi terbaru).
+- [x] **TASK-142** — Test di Microsoft Edge (versi terbaru).
 
-- [ ] **TASK-143** — Commit progress:
+- [x] **TASK-143** — Commit progress:
   ```bash
   git add . && git commit -m "test: semua skenario testing manual selesai"
   ```
@@ -540,36 +540,36 @@
 > Estimasi: **1–2 jam**
 
 ### 9.1 Dokumentasi Project
-- [ ] **TASK-144** — Buat file `README.md` di root project, berisi:
+- [x] **TASK-144** — Buat file `README.md` di root project, berisi:
   - Deskripsi singkat aplikasi.
   - Screenshot tampilan (dashboard, transaksi, laporan).
   - Prasyarat (PHP 8.1+, MySQL 8.0+, Composer).
   - Langkah instalasi step-by-step.
   - Struktur direktori utama.
   - Daftar fitur.
-- [ ] **TASK-145** — Dokumentasikan konfigurasi `.env` yang diperlukan (tanpa nilai sensitif).
-- [ ] **TASK-146** — Buat file `database.sql` atau pastikan migration + seeder cukup untuk setup ulang DB dari nol.
+- [x] **TASK-145** — Dokumentasikan konfigurasi `.env` yang diperlukan (tanpa nilai sensitif).
+- [x] **TASK-146** — Buat file `database.sql` atau pastikan migration + seeder cukup untuk setup ulang DB dari nol.
 
 ### 9.2 Finalisasi Git
-- [ ] **TASK-147** — Pastikan file `.env` masuk `.gitignore` (tidak ter-commit ke repository).
-- [ ] **TASK-148** — Pastikan folder `vendor/` masuk `.gitignore`.
-- [ ] **TASK-149** — Review semua file yang ter-commit, pastikan tidak ada credential atau data sensitif.
-- [ ] **TASK-150** — Buat tag versi release:
+- [x] **TASK-147** — Pastikan file `.env` masuk `.gitignore` (tidak ter-commit ke repository).
+- [x] **TASK-148** — Pastikan folder `vendor/` masuk `.gitignore`.
+- [x] **TASK-149** — Review semua file yang ter-commit, pastikan tidak ada credential atau data sensitif.
+- [x] **TASK-150** — Buat tag versi release:
   ```bash
   git tag -a v1.0.0 -m "Release v1.0.0 — Aplikasi Catatan Keuangan Sederhana"
   ```
 
 ### 9.3 Acceptance Criteria Final Check
-- [ ] **TASK-151** — ✅ Pengguna dapat menambah transaksi pemasukan dan pengeluaran.
-- [ ] **TASK-152** — ✅ Pengguna dapat mengedit dan menghapus transaksi dengan konfirmasi SweetAlert2.
-- [ ] **TASK-153** — ✅ Total saldo di dashboard terupdate otomatis.
-- [ ] **TASK-154** — ✅ Bar chart menampilkan data 12 bulan terakhir dengan benar.
-- [ ] **TASK-155** — ✅ Doughnut chart menampilkan distribusi pengeluaran per kategori.
-- [ ] **TASK-156** — ✅ Filter pada laporan menghasilkan data yang akurat.
-- [ ] **TASK-157** — ✅ Semua form memiliki validasi sisi server.
-- [ ] **TASK-158** — ✅ Aplikasi berjalan tanpa error di lingkungan lokal.
+- [x] **TASK-151** — ✅ Pengguna dapat menambah transaksi pemasukan dan pengeluaran.
+- [x] **TASK-152** — ✅ Pengguna dapat mengedit dan menghapus transaksi dengan konfirmasi SweetAlert2.
+- [x] **TASK-153** — ✅ Total saldo di dashboard terupdate otomatis.
+- [x] **TASK-154** — ✅ Bar chart menampilkan data 12 bulan terakhir dengan benar.
+- [x] **TASK-155** — ✅ Doughnut chart menampilkan distribusi pengeluaran per kategori.
+- [x] **TASK-156** — ✅ Filter pada laporan menghasilkan data yang akurat.
+- [x] **TASK-157** — ✅ Semua form memiliki validasi sisi server.
+- [x] **TASK-158** — ✅ Aplikasi berjalan tanpa error di lingkungan lokal.
 
-- [ ] **TASK-159** — Commit final:
+- [x] **TASK-159** — Commit final:
   ```bash
   git add . && git commit -m "docs: README dan finalisasi project v1.0.0"
   ```

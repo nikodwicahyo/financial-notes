@@ -23,10 +23,6 @@ class Dashboard extends BaseController
         $monthlyData = $this->transactionModel->getMonthlyData(date('Y'));
         $expenseByCategory = $this->transactionModel->getExpenseByCategory(date('m'), date('Y'));
 
-        // Debug: Log the data
-        log_message('debug', 'Monthly Data: ' . json_encode($monthlyData));
-        log_message('debug', 'Expense by Category: ' . json_encode($expenseByCategory));
-
         $data = [
             'title' => 'Dashboard',
             'totalIncome' => $totalIncome,

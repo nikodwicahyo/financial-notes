@@ -1,69 +1,326 @@
-# CodeIgniter 4 Application Starter
+# 💰 Aplikasi Catatan Keuangan Sederhana
 
-## What is CodeIgniter?
+Aplikasi berbasis web untuk mencatat, mengelola, dan memantau pemasukan serta pengeluaran harian secara terstruktur. Dibangun menggunakan **CodeIgniter 4** dan **MySQL** dengan tampilan modern menggunakan **Bootstrap 5** dan visualisasi data interaktif dengan **Chart.js**.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?logo=php)
+![CodeIgniter](https://img.shields.io/badge/CodeIgniter-4-EF4223?logo=codeigniter)
+![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-4479A1?logo=mysql)
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 📸 Screenshot
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### Dashboard
+Dashboard menampilkan ringkasan keuangan dengan kartu total saldo, pemasukan, dan pengeluaran. Dilengkapi dengan grafik bar chart perbandingan pemasukan vs pengeluaran 12 bulan terakhir dan doughnut chart distribusi pengeluaran per kategori.
 
-## Installation & updates
+### Transaksi
+Halaman manajemen transaksi dengan fitur filter berdasarkan jenis, kategori, dan rentang tanggal. Mendukung operasi CRUD lengkap dengan konfirmasi hapus menggunakan SweetAlert2.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+### Laporan
+Laporan keuangan dengan filter periode (bulan & tahun), jenis transaksi, dan kategori. Menampilkan ringkasan total pemasukan, pengeluaran, dan saldo periode.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+---
 
-## Setup
+## ✨ Fitur Utama
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+- ✅ **Manajemen Transaksi (CRUD)** - Tambah, lihat, edit, dan hapus transaksi pemasukan/pengeluaran
+- ✅ **Kategorisasi Transaksi** - Organisir transaksi berdasarkan kategori (Makan, Transport, Gaji, dll)
+- ✅ **Dashboard Interaktif** - Ringkasan keuangan dengan total saldo, pemasukan, dan pengeluaran
+- ✅ **Grafik Visualisasi** - Bar chart dan doughnut chart menggunakan Chart.js
+- ✅ **Laporan Keuangan** - Filter transaksi berdasarkan periode dan kategori
+- ✅ **Manajemen Kategori** - Kelola kategori transaksi dengan ikon Bootstrap Icons
+- ✅ **Validasi Form** - Validasi sisi server untuk semua input
+- ✅ **Keamanan** - CSRF protection dan XSS prevention
+- ✅ **Responsive Design** - Tampilan menyesuaikan desktop dan tablet
+- ✅ **Pagination** - Daftar transaksi dengan pagination (10 per halaman)
 
-## Important Change with index.php
+---
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## 🛠️ Teknologi yang Digunakan
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+| Layer | Teknologi |
+|-------|-----------|
+| **Backend Framework** | CodeIgniter 4 (PHP 8.2+) |
+| **Database** | MySQL 8.0+ |
+| **Frontend UI** | Bootstrap 5.3 |
+| **Grafik** | Chart.js 4.x |
+| **Alert Dialog** | SweetAlert2 |
+| **Icons** | Bootstrap Icons |
 
-**Please** read the user guide for a better explanation of how CI4 works!
+---
 
-## Repository Management
+## 📋 Prasyarat
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Sebelum instalasi, pastikan sistem Anda memiliki:
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+- **PHP 8.2 atau lebih tinggi** dengan ekstensi:
+  - `intl`
+  - `mbstring`
+  - `curl`
+  - `pdo_mysql`
+  - `xml`
+  - `json` (enabled by default)
+- **MySQL 8.0 atau lebih tinggi**
+- **Composer** (Dependency Manager untuk PHP)
+- **Web Server** (Apache/Nginx) atau **Laragon/XAMPP**
+- **Git** (untuk version control)
 
-## Server Requirements
+---
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+## 🚀 Instalasi
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+### 1. Clone Repository
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+```bash
+git clone <repository-url>
+cd keuangan-app
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 2. Install Dependencies
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+composer install
+```
+
+### 3. Konfigurasi Environment
+
+Salin file `.env.example` menjadi `.env`:
+
+```bash
+cp env .env
+```
+
+Atau di Windows:
+
+```bash
+copy env .env
+```
+
+### 4. Konfigurasi Database
+
+Edit file `.env` dan sesuaikan konfigurasi database:
+
+```env
+# ENVIRONMENT
+CI_ENVIRONMENT = development
+
+# DATABASE
+database.default.hostname = localhost
+database.default.database = keuangan_db
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.port     = 3306
+```
+
+### 5. Buat Database
+
+Buka phpMyAdmin atau MySQL CLI, lalu jalankan:
+
+```sql
+CREATE DATABASE keuangan_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+### 6. Jalankan Migration
+
+```bash
+php spark migrate
+```
+
+Migration akan membuat 2 tabel:
+- `categories` - Menyimpan kategori transaksi
+- `transactions` - Menyimpan data transaksi
+
+### 7. Jalankan Seeder (Data Awal)
+
+```bash
+php spark db:seed CategorySeeder
+```
+
+Seeder akan mengisi 8 kategori default:
+- Makan & Minum
+- Transport
+- Belanja
+- Kesehatan
+- Hiburan
+- Gaji
+- Freelance
+- Lainnya
+
+### 8. Jalankan Aplikasi
+
+Gunakan built-in PHP server:
+
+```bash
+php spark serve
+```
+
+Atau akses melalui web server lokal (Laragon/XAMPP):
+
+```
+http://localhost/keuangan-app/public
+```
+
+Aplikasi siap digunakan! 🎉
+
+---
+
+## 📁 Struktur Direktori
+
+```
+keuangan-app/
+├── app/
+│   ├── Config/
+│   │   ├── Routes.php          # Routing aplikasi
+│   │   ├── Database.php        # Konfigurasi database
+│   │   └── Security.php        # Konfigurasi keamanan
+│   ├── Controllers/
+│   │   ├── Dashboard.php       # Controller dashboard
+│   │   ├── Transactions.php    # Controller transaksi
+│   │   ├── Categories.php      # Controller kategori
+│   │   └── Reports.php         # Controller laporan
+│   ├── Models/
+│   │   ├── TransactionModel.php # Model transaksi
+│   │   └── CategoryModel.php    # Model kategori
+│   ├── Views/
+│   │   ├── layouts/
+│   │   │   └── main.php        # Layout utama
+│   │   ├── dashboard/
+│   │   │   └── index.php       # View dashboard
+│   │   ├── transactions/
+│   │   │   ├── index.php       # Daftar transaksi
+│   │   │   ├── create.php      # Form tambah transaksi
+│   │   │   └── edit.php        # Form edit transaksi
+│   │   ├── categories/
+│   │   │   ├── index.php       # Daftar kategori
+│   │   │   └── form.php        # Form kategori
+│   │   └── reports/
+│   │       └── index.php       # Laporan keuangan
+│   └── Database/
+│       ├── Migrations/
+│       │   ├── CreateCategoriesTable.php
+│       │   └── CreateTransactionsTable.php
+│       └── Seeds/
+│           └── CategorySeeder.php
+├── public/
+│   ├── assets/
+│   │   └── css/
+│   │       └── style.css       # Custom CSS
+│   └── index.php               # Entry point
+├── writable/                   # Cache, logs, session
+├── .env                        # Environment config (tidak di-commit)
+├── composer.json               # Dependencies
+└── README.md                   # Dokumentasi ini
+```
+
+---
+
+## 🎯 Cara Penggunaan
+
+### Dashboard
+1. Buka halaman utama untuk melihat ringkasan keuangan
+2. Lihat total saldo, pemasukan, dan pengeluaran bulan berjalan
+3. Analisis grafik pemasukan vs pengeluaran 12 bulan terakhir
+4. Lihat distribusi pengeluaran per kategori bulan ini
+
+### Transaksi
+1. Klik menu **Transaksi** di sidebar
+2. Klik tombol **+ Tambah Transaksi** untuk menambah transaksi baru
+3. Isi form: Judul, Jenis (Pemasukan/Pengeluaran), Jumlah, Kategori, Tanggal, Catatan
+4. Gunakan filter untuk mencari transaksi berdasarkan jenis, kategori, atau tanggal
+5. Klik **Edit** untuk mengubah transaksi
+6. Klik **Hapus** untuk menghapus transaksi (akan muncul konfirmasi)
+
+### Kategori
+1. Klik menu **Kategori** di sidebar
+2. Klik tombol **+ Tambah Kategori** untuk menambah kategori baru
+3. Isi nama kategori dan ikon (contoh: `bi-cup-hot`)
+4. Kategori yang sedang digunakan transaksi tidak dapat dihapus
+
+### Laporan
+1. Klik menu **Laporan** di sidebar
+2. Pilih bulan dan tahun yang ingin dilihat
+3. Filter berdasarkan jenis transaksi atau kategori (opsional)
+4. Klik **Tampilkan** untuk melihat laporan
+5. Lihat ringkasan total pemasukan, pengeluaran, dan saldo periode
+
+---
+
+## 🔒 Keamanan
+
+Aplikasi ini menerapkan praktik keamanan dasar:
+
+- **CSRF Protection** - Semua form dilindungi CSRF token
+- **XSS Prevention** - Output data menggunakan `esc()` helper
+- **SQL Injection Prevention** - Query menggunakan Query Builder CI4
+- **Input Validation** - Validasi sisi server untuk semua input
+- **Password Hashing** - (Untuk fitur login di versi mendatang)
+
+---
+
+## 🧪 Testing
+
+Aplikasi telah melalui testing manual meliputi:
+
+✅ Functional testing semua modul (Dashboard, Transaksi, Kategori, Laporan)  
+✅ Validasi form dan error handling  
+✅ Filter dan pagination  
+✅ Keamanan (CSRF, XSS)  
+✅ Cross-browser testing (Chrome, Firefox, Edge)  
+✅ Responsive design (Desktop & Tablet)
+
+---
+
+## 🗄️ Struktur Database
+
+### Tabel `categories`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | INT (PK, AI) | ID kategori |
+| name | VARCHAR(100) | Nama kategori |
+| icon | VARCHAR(50) | Ikon Bootstrap Icons |
+| created_at | DATETIME | Tanggal dibuat |
+
+### Tabel `transactions`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | INT (PK, AI) | ID transaksi |
+| title | VARCHAR(150) | Judul transaksi |
+| type | ENUM('income','expense') | Jenis transaksi |
+| amount | DECIMAL(15,2) | Jumlah nominal |
+| category_id | INT (FK) | ID kategori |
+| transaction_date | DATE | Tanggal transaksi |
+| note | TEXT | Catatan (opsional) |
+| created_at | DATETIME | Tanggal dibuat |
+| updated_at | DATETIME | Tanggal diupdate |
+
+**Relasi:** `transactions.category_id` → `categories.id` (RESTRICT, CASCADE)
+
+---
+
+## 🔄 Reset Database
+
+Jika ingin mereset database ke kondisi awal:
+
+```bash
+# Rollback semua migration
+php spark migrate:rollback
+
+# Jalankan ulang migration
+php spark migrate
+
+# Jalankan seeder
+php spark db:seed CategorySeeder
+```
+
+## 👨‍💻 Kontributor
+
+Dikembangkan sebagai studi kasus pembelajaran CodeIgniter 4 untuk manajemen keuangan personal.
+By Niko Dwicahyo Widiyanto
+
+---
+
+**Selamat mencatat keuangan! 💰📊**
