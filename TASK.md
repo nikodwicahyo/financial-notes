@@ -62,11 +62,11 @@
   ```
 
 ### 1.2 Buat Migration
-- [ ] **TASK-013** — Generate file migration untuk tabel `categories`:
+- [x] **TASK-013** — Generate file migration untuk tabel `categories`:
   ```bash
   php spark make:migration CreateCategoriesTable
   ```
-- [ ] **TASK-014** — Isi migration `CreateCategoriesTable` dengan skema:
+- [x] **TASK-014** — Isi migration `CreateCategoriesTable` dengan skema:
   ```php
   $this->forge->addField([
       'id'         => ['type' => 'INT', 'auto_increment' => true],
@@ -77,11 +77,11 @@
   $this->forge->addKey('id', true);
   $this->forge->createTable('categories');
   ```
-- [ ] **TASK-015** — Generate file migration untuk tabel `transactions`:
+- [x] **TASK-015** — Generate file migration untuk tabel `transactions`:
   ```bash
   php spark make:migration CreateTransactionsTable
   ```
-- [ ] **TASK-016** — Isi migration `CreateTransactionsTable` dengan skema:
+- [x] **TASK-016** — Isi migration `CreateTransactionsTable` dengan skema:
   ```php
   $this->forge->addField([
       'id'               => ['type' => 'INT', 'auto_increment' => true],
@@ -98,18 +98,18 @@
   $this->forge->addForeignKey('category_id', 'categories', 'id', 'RESTRICT', 'CASCADE');
   $this->forge->createTable('transactions');
   ```
-- [ ] **TASK-017** — Jalankan semua migration:
+- [x] **TASK-017** — Jalankan semua migration:
   ```bash
   php spark migrate
   ```
-- [ ] **TASK-018** — Verifikasi tabel `categories` dan `transactions` terbuat di phpMyAdmin.
+- [x] **TASK-018** — Verifikasi tabel `categories` dan `transactions` terbuat di phpMyAdmin.
 
 ### 1.3 Buat Seeder (Data Awal)
-- [ ] **TASK-019** — Generate file seeder untuk kategori default:
+- [x] **TASK-019** — Generate file seeder untuk kategori default:
   ```bash
   php spark make:seeder CategorySeeder
   ```
-- [ ] **TASK-020** — Isi `CategorySeeder` dengan 8 kategori default:
+- [x] **TASK-020** — Isi `CategorySeeder` dengan 8 kategori default:
   ```php
   $data = [
       ['name' => 'Makan & Minum', 'icon' => 'bi-cup-hot'],
@@ -123,13 +123,13 @@
   ];
   $this->db->table('categories')->insertBatch($data);
   ```
-- [ ] **TASK-021** — Daftarkan `CategorySeeder` di `DatabaseSeeder.php`.
-- [ ] **TASK-022** — Jalankan seeder:
+- [x] **TASK-021** — Daftarkan `CategorySeeder` di `DatabaseSeeder.php`.
+- [x] **TASK-022** — Jalankan seeder:
   ```bash
   php spark db:seed CategorySeeder
   ```
-- [ ] **TASK-023** — Verifikasi 8 kategori berhasil masuk ke tabel `categories`.
-- [ ] **TASK-024** — Commit progress:
+- [x] **TASK-023** — Verifikasi 8 kategori berhasil masuk ke tabel `categories`.
+- [x] **TASK-024** — Commit progress:
   ```bash
   git add . && git commit -m "feat: database migration & seeder setup"
   ```
