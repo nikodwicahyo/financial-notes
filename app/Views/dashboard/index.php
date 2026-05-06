@@ -142,8 +142,16 @@ console.log('Dashboard Data Check:');
 console.log('Monthly Data:', <?= json_encode($monthlyData) ?>);
 console.log('Expense by Category:', <?= json_encode($expenseByCategory) ?>);
 
-// Initialize charts when page loads
-window.addEventListener('load', function() {
+// Wait for Chart.js to load
+function initCharts() {
+    if (typeof Chart === 'undefined') {
+        console.log('Chart.js not loaded yet, retrying...');
+        setTimeout(initCharts, 100);
+        return;
+    }
+    
+    console.log('Chart.js loaded, initializing charts...');
+    
     // Bar Chart Data
     const monthlyData = <?= json_encode($monthlyData) ?>;
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -182,6 +190,7 @@ window.addEventListener('load', function() {
                 }
             }
         });
+        console.log('Bar chart created successfully');
     }
     
     // Doughnut Chart Data
@@ -211,7 +220,11 @@ window.addEventListener('load', function() {
                 maintainAspectRatio: false
             }
         });
+        console.log('Doughnut chart created successfully');
     }
-});
+}
+
+// Start initialization when page loads
+window.addEventListener('load', initCharts);
 </script>
 <?= $this->endSection() ?>
