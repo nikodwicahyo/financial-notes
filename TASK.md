@@ -140,33 +140,33 @@
 > Estimasi: **2–3 jam**
 
 ### 2.1 Persiapan Aset Frontend
-- [ ] **TASK-025** — Tambahkan CDN di layout utama (via tag `<head>`):
+- [x] **TASK-025** — Tambahkan CDN di layout utama (via tag `<head>`):
   - Bootstrap 5.3 CSS
   - Bootstrap Icons
   - Chart.js 4.x
   - SweetAlert2
-- [ ] **TASK-026** — Tambahkan CDN JS di bagian bawah `<body>`:
+- [x] **TASK-026** — Tambahkan CDN JS di bagian bawah `<body>`:
   - Bootstrap 5.3 JS Bundle
   - SweetAlert2 JS
 
 ### 2.2 Buat Layout Utama (Master Template)
-- [ ] **TASK-027** — Buat file `app/Views/layouts/main.php` sebagai template dasar dengan struktur:
+- [x] **TASK-027** — Buat file `app/Views/layouts/main.php` sebagai template dasar dengan struktur:
   - `<head>` berisi meta, title, CDN CSS.
   - `<body>` berisi sidebar + konten area + CDN JS.
   - Gunakan `$this->renderSection('content')` untuk slot konten.
-- [ ] **TASK-028** — Buat komponen **Sidebar** di dalam layout dengan navigasi:
+- [x] **TASK-028** — Buat komponen **Sidebar** di dalam layout dengan navigasi:
   - 🏠 Dashboard (link ke `/`)
   - 💸 Transaksi (link ke `/transactions`)
   - 🏷️ Kategori (link ke `/categories`)
   - 📊 Laporan (link ke `/reports`)
-- [ ] **TASK-029** — Tambahkan **active state** pada menu sidebar berdasarkan URL saat ini menggunakan helper `current_url()`.
-- [ ] **TASK-030** — Buat komponen **flash message** di layout untuk menampilkan notifikasi sukses/error dari session.
-- [ ] **TASK-031** — Buat file `app/Views/layouts/header.php` untuk topbar (nama aplikasi, tanggal hari ini).
-- [ ] **TASK-032** — Test layout dengan membuka halaman `http://localhost/keuangan-app/public` — sidebar dan topbar harus tampil.
+- [x] **TASK-029** — Tambahkan **active state** pada menu sidebar berdasarkan URL saat ini menggunakan helper `current_url()`.
+- [x] **TASK-030** — Buat komponen **flash message** di layout untuk menampilkan notifikasi sukses/error dari session.
+- [x] **TASK-031** — Buat file `app/Views/layouts/header.php` untuk topbar (nama aplikasi, tanggal hari ini).
+- [x] **TASK-032** — Test layout dengan membuka halaman `http://localhost/keuangan-app/public` — sidebar dan topbar harus tampil.
 
 ### 2.3 Konfigurasi Routing
-- [ ] **TASK-033** — Buka `app/Config/Routes.php`, hapus/nonaktifkan auto-routing.
-- [ ] **TASK-034** — Tambahkan routing manual:
+- [x] **TASK-033** — Buka `app/Config/Routes.php`, hapus/nonaktifkan auto-routing.
+- [x] **TASK-034** — Tambahkan routing manual:
   ```php
   $routes->get('/', 'Dashboard::index');
   $routes->get('transactions', 'Transactions::index');
@@ -183,7 +183,7 @@
   $routes->get('categories/delete/(:num)', 'Categories::delete/$1');
   $routes->get('reports', 'Reports::index');
   ```
-- [ ] **TASK-035** — Commit progress:
+- [x] **TASK-035** — Commit progress:
   ```bash
   git add . && git commit -m "feat: layout template & routing setup"
   ```
