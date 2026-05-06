@@ -41,7 +41,7 @@ Aplikasi berbasis web untuk mencatat, mengelola, dan memantau pemasukan serta pe
 
 Sebelum instalasi, pastikan sistem Anda memiliki:
 
-- **PHP 8.2 atau lebih tinggi** dengan ekstensi:
+- **PHP 8.2 atau lebih tinggi** 
 - **MySQL 8.0 atau lebih tinggi**
 - **Composer** (Dependency Manager untuk PHP)
 - **Web Server** (Apache/Nginx) atau **Laragon/XAMPP**
