@@ -9,19 +9,6 @@ Aplikasi berbasis web untuk mencatat, mengelola, dan memantau pemasukan serta pe
 
 ---
 
-## 📸 Screenshot
-
-### Dashboard
-Dashboard menampilkan ringkasan keuangan dengan kartu total saldo, pemasukan, dan pengeluaran. Dilengkapi dengan grafik bar chart perbandingan pemasukan vs pengeluaran 12 bulan terakhir dan doughnut chart distribusi pengeluaran per kategori.
-
-### Transaksi
-Halaman manajemen transaksi dengan fitur filter berdasarkan jenis, kategori, dan rentang tanggal. Mendukung operasi CRUD lengkap dengan konfirmasi hapus menggunakan SweetAlert2.
-
-### Laporan
-Laporan keuangan dengan filter periode (bulan & tahun), jenis transaksi, dan kategori. Menampilkan ringkasan total pemasukan, pengeluaran, dan saldo periode.
-
----
-
 ## ✨ Fitur Utama
 
 - ✅ **Manajemen Transaksi (CRUD)** - Tambah, lihat, edit, dan hapus transaksi pemasukan/pengeluaran
@@ -73,8 +60,8 @@ Sebelum instalasi, pastikan sistem Anda memiliki:
 ### 1. Clone Repository
 
 ```bash
-git clone <repository-url>
-cd keuangan-app
+git clone https://github.com/nikodwicahyo/financial-notes.git
+cd financial-notes
 ```
 
 ### 2. Install Dependencies
@@ -214,39 +201,6 @@ keuangan-app/
 └── README.md                   # Dokumentasi ini
 ```
 
----
-
-## 🎯 Cara Penggunaan
-
-### Dashboard
-1. Buka halaman utama untuk melihat ringkasan keuangan
-2. Lihat total saldo, pemasukan, dan pengeluaran bulan berjalan
-3. Analisis grafik pemasukan vs pengeluaran 12 bulan terakhir
-4. Lihat distribusi pengeluaran per kategori bulan ini
-
-### Transaksi
-1. Klik menu **Transaksi** di sidebar
-2. Klik tombol **+ Tambah Transaksi** untuk menambah transaksi baru
-3. Isi form: Judul, Jenis (Pemasukan/Pengeluaran), Jumlah, Kategori, Tanggal, Catatan
-4. Gunakan filter untuk mencari transaksi berdasarkan jenis, kategori, atau tanggal
-5. Klik **Edit** untuk mengubah transaksi
-6. Klik **Hapus** untuk menghapus transaksi (akan muncul konfirmasi)
-
-### Kategori
-1. Klik menu **Kategori** di sidebar
-2. Klik tombol **+ Tambah Kategori** untuk menambah kategori baru
-3. Isi nama kategori dan ikon (contoh: `bi-cup-hot`)
-4. Kategori yang sedang digunakan transaksi tidak dapat dihapus
-
-### Laporan
-1. Klik menu **Laporan** di sidebar
-2. Pilih bulan dan tahun yang ingin dilihat
-3. Filter berdasarkan jenis transaksi atau kategori (opsional)
-4. Klik **Tampilkan** untuk melihat laporan
-5. Lihat ringkasan total pemasukan, pengeluaran, dan saldo periode
-
----
-
 ## 🔒 Keamanan
 
 Aplikasi ini menerapkan praktik keamanan dasar:
@@ -319,7 +273,7 @@ php spark db:seed CategorySeeder
 ## 👨‍💻 Kontributor
 
 Dikembangkan sebagai studi kasus pembelajaran CodeIgniter 4 untuk manajemen keuangan personal.
-By Niko Dwicahyo Widiyanto
+Dibuat oleh Niko Dwicahyo Widiyanto
 
 ---
 
