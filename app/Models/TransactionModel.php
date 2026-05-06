@@ -28,26 +28,17 @@ class TransactionModel extends Model
 
     public function getMonthlyData($year)
     {
+        $db = \Config\Database::connect();
         $data = [];
+        
         for ($month = 1; $month <= 12; $month++) {
-            // Create fresh builder instances for each query
-            $incomeBuilder = $this->builder();
-            $income = $incomeBuilder->where('type', 'income')
-                                   ->where('YEAR(transaction_date)', $year)
-                                   ->where('MONTH(transaction_date)', $month)
-                                   ->selectSum('amount')
-                                   ->get()
-                                   ->getRow()
-                                   ->amount ?? 0;
+            // Get income for this month
+            $incomeQuery = $db->query("SELECT COALESCE(SUM(amount), 0) as total FROM transactions WHERE type = 'income' AND YEAR(transaction_date) = ? AND MONTH(transaction_date) = ?", [$year, $month]);
+            $income = $incomeQuery->getRow()->total;
             
-            $expenseBuilder = $this->builder();
-            $expense = $expenseBuilder->where('type', 'expense')
-                                     ->where('YEAR(transaction_date)', $year)
-                                     ->where('MONTH(transaction_date)', $month)
-                                     ->selectSum('amount')
-                                     ->get()
-                                     ->getRow()
-                                     ->amount ?? 0;
+            // Get expense for this month
+            $expenseQuery = $db->query("SELECT COALESCE(SUM(amount), 0) as total FROM transactions WHERE type = 'expense' AND YEAR(transaction_date) = ? AND MONTH(transaction_date) = ?", [$year, $month]);
+            $expense = $expenseQuery->getRow()->total;
             
             $data[] = [
                 'month' => $month,
@@ -55,20 +46,25 @@ class TransactionModel extends Model
                 'expense' => (float)$expense
             ];
         }
+        
         return $data;
     }
 
     public function getExpenseByCategory($month, $year)
     {
-        $builder = $this->builder();
-        return $builder->select('categories.name, SUM(transactions.amount) as total')
-                      ->join('categories', 'categories.id = transactions.category_id')
-                      ->where('transactions.type', 'expense')
-                      ->where('MONTH(transactions.transaction_date)', $month)
-                      ->where('YEAR(transactions.transaction_date)', $year)
-                      ->groupBy('transactions.category_id')
-                      ->get()
-                      ->getResultArray();
+        $db = \Config\Database::connect();
+        $query = $db->query("
+            SELECT c.name, COALESCE(SUM(t.amount), 0) as total 
+            FROM transactions t 
+            JOIN categories c ON c.id = t.category_id 
+            WHERE t.type = 'expense' 
+            AND MONTH(t.transaction_date) = ? 
+            AND YEAR(t.transaction_date) = ? 
+            GROUP BY t.category_id, c.name
+            HAVING total > 0
+        ", [$month, $year]);
+        
+        return $query->getResultArray();
     }
 
     public function getRecent($limit = 5)

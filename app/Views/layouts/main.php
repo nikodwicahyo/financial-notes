@@ -29,7 +29,7 @@
             <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar" id="sidebar">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
-                        <h5 class="text-white">💰 Keuangan App</h5>
+                        <h5 class="text-white">💰 Pencatat Keuangan</h5>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">

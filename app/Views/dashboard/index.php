@@ -137,36 +137,39 @@
 </div>
 
 <script>
-// Debug: Check if data is available
+// Debug output
+console.log('Dashboard Data Check:');
 console.log('Monthly Data:', <?= json_encode($monthlyData) ?>);
 console.log('Expense by Category:', <?= json_encode($expenseByCategory) ?>);
 
-// Prepare data for charts
-const monthlyData = <?= json_encode($monthlyData) ?>;
-const expenseByCategory = <?= json_encode($expenseByCategory) ?>;
-
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Bar Chart
-    const barCanvas = document.getElementById('barChart');
-    if (barCanvas && monthlyData) {
-        const barCtx = barCanvas.getContext('2d');
-        const barChart = new Chart(barCtx, {
+// Initialize charts when page loads
+window.addEventListener('load', function() {
+    // Bar Chart Data
+    const monthlyData = <?= json_encode($monthlyData) ?>;
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    
+    // Extract income and expense data
+    const incomeData = monthlyData.map(item => parseFloat(item.income) || 0);
+    const expenseData = monthlyData.map(item => parseFloat(item.expense) || 0);
+    
+    console.log('Income Data:', incomeData);
+    console.log('Expense Data:', expenseData);
+    
+    // Create Bar Chart
+    const barCtx = document.getElementById('barChart');
+    if (barCtx) {
+        new Chart(barCtx, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                labels: monthNames,
                 datasets: [{
                     label: 'Pemasukan',
-                    data: monthlyData.map(item => parseFloat(item.income) || 0),
-                    backgroundColor: '#198754',
-                    borderColor: '#198754',
-                    borderWidth: 1
+                    data: incomeData,
+                    backgroundColor: '#198754'
                 }, {
-                    label: 'Pengeluaran',
-                    data: monthlyData.map(item => parseFloat(item.expense) || 0),
-                    backgroundColor: '#dc3545',
-                    borderColor: '#dc3545',
-                    borderWidth: 1
+                    label: 'Pengeluaran', 
+                    data: expenseData,
+                    backgroundColor: '#dc3545'
                 }]
             },
             options: {
@@ -174,61 +177,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false,
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'Rp ' + value.toLocaleString('id-ID');
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.dataset.label + ': Rp ' + context.parsed.y.toLocaleString('id-ID');
-                            }
-                        }
+                        beginAtZero: true
                     }
                 }
             }
         });
     }
-
-    // Doughnut Chart
-    const doughnutCanvas = document.getElementById('doughnutChart');
-    if (doughnutCanvas && expenseByCategory && expenseByCategory.length > 0) {
-        const doughnutCtx = doughnutCanvas.getContext('2d');
-        const doughnutChart = new Chart(doughnutCtx, {
+    
+    // Doughnut Chart Data
+    const expenseByCategory = <?= json_encode($expenseByCategory) ?>;
+    console.log('Expense by Category for Chart:', expenseByCategory);
+    
+    // Create Doughnut Chart
+    const doughnutCtx = document.getElementById('doughnutChart');
+    if (doughnutCtx && expenseByCategory && expenseByCategory.length > 0) {
+        const labels = expenseByCategory.map(item => item.name);
+        const data = expenseByCategory.map(item => parseFloat(item.total) || 0);
+        
+        console.log('Doughnut Labels:', labels);
+        console.log('Doughnut Data:', data);
+        
+        new Chart(doughnutCtx, {
             type: 'doughnut',
             data: {
-                labels: expenseByCategory.map(item => item.name),
+                labels: labels,
                 datasets: [{
-                    data: expenseByCategory.map(item => parseFloat(item.total) || 0),
-                    backgroundColor: [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
-                        '#4BC0C0',
-                        '#9966FF',
-                        '#FF9F40',
-                        '#FF6384',
-                        '#C9CBCF'
-                    ]
+                    data: data,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': Rp ' + context.parsed.toLocaleString('id-ID');
-                            }
-                        }
-                    }
-                }
+                maintainAspectRatio: false
             }
         });
     }
