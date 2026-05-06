@@ -29,7 +29,7 @@ class Reports extends BaseController
             'type' => $type,
             'category_id' => $categoryId,
             'date_from' => $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-01',
-            'date_to' => $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT) . '-31'
+            'date_to' => date('Y-m-t', mktime(0, 0, 0, $month, 1, $year))
         ];
 
         // Get filtered transactions
