@@ -248,37 +248,37 @@
 > Estimasi: **1 hari penuh**
 
 ### 4.1 Model Transaksi
-- [ ] **TASK-051** — Generate model:
+- [x] **TASK-051** — Generate model:
   ```bash
   php spark make:model TransactionModel
   ```
-- [ ] **TASK-052** — Konfigurasi `TransactionModel`:
+- [x] **TASK-052** — Konfigurasi `TransactionModel`:
   ```php
   protected $table      = 'transactions';
   protected $primaryKey = 'id';
   protected $allowedFields = ['title','type','amount','category_id','transaction_date','note'];
   protected $useTimestamps = true;
   ```
-- [ ] **TASK-053** — Tambahkan method `getTotalIncome()`: SUM amount WHERE type = 'income'.
-- [ ] **TASK-054** — Tambahkan method `getTotalExpense()`: SUM amount WHERE type = 'expense'.
-- [ ] **TASK-055** — Tambahkan method `getBalance()`: selisih total income - total expense.
-- [ ] **TASK-056** — Tambahkan method `getMonthlyData($year)`: data income & expense per bulan untuk 1 tahun (dipakai grafik bar chart).
-- [ ] **TASK-057** — Tambahkan method `getExpenseByCategory($month, $year)`: data pengeluaran per kategori bulan ini (dipakai grafik doughnut).
-- [ ] **TASK-058** — Tambahkan method `getRecent($limit = 5)`: ambil N transaksi terbaru dengan JOIN ke tabel categories.
-- [ ] **TASK-059** — Tambahkan method `getFiltered($filters)`: ambil transaksi dengan filter jenis, kategori, rentang tanggal, dengan pagination.
+- [x] **TASK-053** — Tambahkan method `getTotalIncome()`: SUM amount WHERE type = 'income'.
+- [x] **TASK-054** — Tambahkan method `getTotalExpense()`: SUM amount WHERE type = 'expense'.
+- [x] **TASK-055** — Tambahkan method `getBalance()`: selisih total income - total expense.
+- [x] **TASK-056** — Tambahkan method `getMonthlyData($year)`: data income & expense per bulan untuk 1 tahun (dipakai grafik bar chart).
+- [x] **TASK-057** — Tambahkan method `getExpenseByCategory($month, $year)`: data pengeluaran per kategori bulan ini (dipakai grafik doughnut).
+- [x] **TASK-058** — Tambahkan method `getRecent($limit = 5)`: ambil N transaksi terbaru dengan JOIN ke tabel categories.
+- [x] **TASK-059** — Tambahkan method `getFiltered($filters)`: ambil transaksi dengan filter jenis, kategori, rentang tanggal, dengan pagination.
 
 ### 4.2 Controller Transaksi
-- [ ] **TASK-060** — Generate controller:
+- [x] **TASK-060** — Generate controller:
   ```bash
   php spark make:controller Transactions
   ```
-- [ ] **TASK-061** — Implementasi method `index()`:
+- [x] **TASK-061** — Implementasi method `index()`:
   - Ambil parameter filter dari query string (`$_GET`).
   - Panggil `getFiltered()` dari model.
   - Kirim data transaksi + daftar kategori ke view.
   - Implementasi pagination (10 per halaman).
-- [ ] **TASK-062** — Implementasi method `create()`: tampilkan form dengan dropdown kategori.
-- [ ] **TASK-063** — Implementasi method `store()` dengan validasi:
+- [x] **TASK-062** — Implementasi method `create()`: tampilkan form dengan dropdown kategori.
+- [x] **TASK-063** — Implementasi method `store()` dengan validasi:
   - `title`: required, max 150 karakter.
   - `type`: required, harus `income` atau `expense`.
   - `amount`: required, angka, minimal 1.
@@ -286,12 +286,12 @@
   - `transaction_date`: required, format tanggal valid.
   - Jika valid: simpan, redirect ke index dengan flash sukses.
   - Jika tidak valid: kembalikan ke form dengan pesan error & input lama.
-- [ ] **TASK-064** — Implementasi method `edit($id)`: ambil transaksi by ID, tampilkan form pre-filled + dropdown kategori.
-- [ ] **TASK-065** — Implementasi method `update($id)`: validasi sama seperti store, update data, redirect.
-- [ ] **TASK-066** — Implementasi method `delete($id)`: hapus transaksi by ID, redirect dengan flash message.
+- [x] **TASK-064** — Implementasi method `edit($id)`: ambil transaksi by ID, tampilkan form pre-filled + dropdown kategori.
+- [x] **TASK-065** — Implementasi method `update($id)`: validasi sama seperti store, update data, redirect.
+- [x] **TASK-066** — Implementasi method `delete($id)`: hapus transaksi by ID, redirect dengan flash message.
 
 ### 4.3 View Transaksi
-- [ ] **TASK-067** — Buat `app/Views/transactions/index.php`:
+- [x] **TASK-067** — Buat `app/Views/transactions/index.php`:
   - **Panel Filter** di bagian atas:
     - Dropdown Jenis (Semua / Pemasukan / Pengeluaran).
     - Dropdown Kategori.
@@ -302,23 +302,23 @@
   - Konfirmasi SweetAlert2 sebelum hapus.
   - Pagination di bawah tabel.
   - Tombol "+ Tambah Transaksi" di atas tabel.
-- [ ] **TASK-068** — Buat `app/Views/transactions/create.php`:
+- [x] **TASK-068** — Buat `app/Views/transactions/create.php`:
   - Field: Judul, Jenis (radio button atau select), Jumlah (input number), Kategori (dropdown), Tanggal, Catatan (textarea).
   - Tampilkan error validasi di bawah setiap field jika ada.
   - Tombol Simpan dan Batal.
-- [ ] **TASK-069** — Buat `app/Views/transactions/edit.php`:
+- [x] **TASK-069** — Buat `app/Views/transactions/edit.php`:
   - Sama seperti form create, dengan data transaksi pre-filled.
-- [ ] **TASK-070** — Format tampilan nominal (Rupiah): gunakan helper PHP `number_format()` dengan separator titik, awalan "Rp".
-- [ ] **TASK-071** — Test manual CRUD Transaksi:
-  - [ ] Tambah transaksi pemasukan → muncul di daftar dengan badge hijau.
-  - [ ] Tambah transaksi pengeluaran → muncul di daftar dengan badge merah.
-  - [ ] Edit transaksi → data berubah sesuai.
-  - [ ] Filter transaksi by jenis → hasil sesuai.
-  - [ ] Filter transaksi by kategori → hasil sesuai.
-  - [ ] Hapus transaksi → hilang dari daftar.
-  - [ ] Submit form kosong → muncul pesan validasi.
-  - [ ] Coba hapus kategori yang sudah dipakai transaksi → muncul pesan error.
-- [ ] **TASK-072** — Commit progress:
+- [x] **TASK-070** — Format tampilan nominal (Rupiah): gunakan helper PHP `number_format()` dengan separator titik, awalan "Rp".
+- [x] **TASK-071** — Test manual CRUD Transaksi:
+  - [x] Tambah transaksi pemasukan → muncul di daftar dengan badge hijau.
+  - [x] Tambah transaksi pengeluaran → muncul di daftar dengan badge merah.
+  - [x] Edit transaksi → data berubah sesuai.
+  - [x] Filter transaksi by jenis → hasil sesuai.
+  - [x] Filter transaksi by kategori → hasil sesuai.
+  - [x] Hapus transaksi → hilang dari daftar.
+  - [x] Submit form kosong → muncul pesan validasi.
+  - [x] Coba hapus kategori yang sudah dipakai transaksi → muncul pesan error.
+- [x] **TASK-072** — Commit progress:
   ```bash
   git add . && git commit -m "feat: CRUD transaksi selesai"
   ```

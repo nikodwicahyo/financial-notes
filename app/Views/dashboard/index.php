@@ -3,42 +3,218 @@
 <?= $this->section('title') ?>Dashboard<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
+<!-- Summary Cards -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card <?= $balance >= 0 ? 'bg-success' : 'bg-danger' ?> text-white">
             <div class="card-body">
-                <h5 class="card-title">Selamat Datang di Aplikasi Keuangan</h5>
-                <p class="card-text">Dashboard sedang dalam pengembangan. Layout dan navigasi sudah siap!</p>
-                
-                <!-- Test Cards -->
-                <div class="row mt-4">
-                    <div class="col-md-4">
-                        <div class="card bg-success text-white">
-                            <div class="card-body">
-                                <h6>Total Saldo</h6>
-                                <h4>Rp 0</h4>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Saldo</h6>
+                        <h4>Rp <?= number_format($balance, 0, ',', '.') ?></h4>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body">
-                                <h6>Total Pemasukan</h6>
-                                <h4>Rp 0</h4>
-                            </div>
-                        </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-wallet2 fs-1"></i>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bg-danger text-white">
-                            <div class="card-body">
-                                <h6>Total Pengeluaran</h6>
-                                <h4>Rp 0</h4>
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Pemasukan</h6>
+                        <h4>Rp <?= number_format($totalIncome, 0, ',', '.') ?></h4>
+                        <small>Bulan ini</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-arrow-up-circle fs-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Pengeluaran</h6>
+                        <h4>Rp <?= number_format($totalExpense, 0, ',', '.') ?></h4>
+                        <small>Bulan ini</small>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="bi bi-arrow-down-circle fs-1"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Charts -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Pemasukan vs Pengeluaran (12 Bulan Terakhir)</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="barChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Pengeluaran per Kategori</h5>
+            </div>
+            <div class="card-body">
+                <?php if (empty($expenseByCategory)): ?>
+                    <p class="text-center text-muted">Belum ada data pengeluaran bulan ini</p>
+                <?php else: ?>
+                    <canvas id="doughnutChart"></canvas>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Transactions -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Transaksi Terbaru</h5>
+                <a href="<?= base_url('transactions') ?>" class="btn btn-sm btn-outline-primary">
+                    Lihat Semua <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            <div class="card-body">
+                <?php if (empty($recentTransactions)): ?>
+                    <p class="text-center text-muted">Belum ada transaksi</p>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Jenis</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($recentTransactions as $transaction): ?>
+                                    <tr>
+                                        <td><?= date('d/m/Y', strtotime($transaction['transaction_date'])) ?></td>
+                                        <td><?= esc($transaction['title']) ?></td>
+                                        <td><?= esc($transaction['category_name']) ?></td>
+                                        <td>
+                                            <?php if ($transaction['type'] == 'income'): ?>
+                                                <span class="badge bg-success">Pemasukan</span>
+                                            <?php else: ?>
+                                                <span class="badge bg-danger">Pengeluaran</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>Rp <?= number_format($transaction['amount'], 0, ',', '.') ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Prepare data for charts
+const monthlyData = <?= json_encode($monthlyData) ?>;
+const expenseByCategory = <?= json_encode($expenseByCategory) ?>;
+
+// Bar Chart
+const barCtx = document.getElementById('barChart').getContext('2d');
+const barChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+        datasets: [{
+            label: 'Pemasukan',
+            data: monthlyData.map(item => item.income),
+            backgroundColor: '#198754',
+            borderColor: '#198754',
+            borderWidth: 1
+        }, {
+            label: 'Pengeluaran',
+            data: monthlyData.map(item => item.expense),
+            backgroundColor: '#dc3545',
+            borderColor: '#dc3545',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'Rp ' + value.toLocaleString('id-ID');
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': Rp ' + context.parsed.y.toLocaleString('id-ID');
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Doughnut Chart
+<?php if (!empty($expenseByCategory)): ?>
+const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+const doughnutChart = new Chart(doughnutCtx, {
+    type: 'doughnut',
+    data: {
+        labels: expenseByCategory.map(item => item.name),
+        datasets: [{
+            data: expenseByCategory.map(item => item.total),
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#4BC0C0',
+                '#9966FF',
+                '#FF9F40',
+                '#FF6384',
+                '#C9CBCF'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.label + ': Rp ' + context.parsed.toLocaleString('id-ID');
+                    }
+                }
+            }
+        }
+    }
+});
+<?php endif; ?>
+</script>
 <?= $this->endSection() ?>
